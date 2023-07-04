@@ -16,7 +16,6 @@ import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { AlertModal } from '@/components/modals/alert-modal';
-import { ApiAlert } from '@/components/ui/api-alert';
 import { useOrigin } from '@/hooks/use-origin';
 import ImageUpload from '@/components/ui/image-upload';
 
@@ -40,7 +39,6 @@ interface BillboardPageProps {
 export const BillboardForm: React.FC<BillboardPageProps> = ({ initialData }) => {
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin()
 
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -62,7 +60,7 @@ export const BillboardForm: React.FC<BillboardPageProps> = ({ initialData }) => 
         try {
             setLoading(true)
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardsId}`, data)
+                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data)
             } else {
                 await axios.post(`/api/${params.storeId}/billboards`, data)
             }
@@ -81,9 +79,9 @@ export const BillboardForm: React.FC<BillboardPageProps> = ({ initialData }) => 
     const onDelete = async () => {
         try {
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardsId}`)
+            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh();
-            router.push('/')
+            router.push(`/${params.storeId}/billboards`)
             toast.success("Billboard deleted successfully")
         } catch (error) {
             toast.error("Make sure you removed all categories using this billboard")
@@ -162,7 +160,7 @@ export const BillboardForm: React.FC<BillboardPageProps> = ({ initialData }) => 
                     </Button>
                 </form>
             </Form>
-            <Separator />
+
 
         </>
 
