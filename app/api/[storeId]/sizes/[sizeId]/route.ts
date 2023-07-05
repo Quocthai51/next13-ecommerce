@@ -9,7 +9,7 @@ export async function GET(
   try {
 
     if (!params.sizeId) {
-      return new NextResponse("Size is required", { status: 400 });
+      return new NextResponse("Size id is required", { status: 400 });
     }
 
     const size = await prismadb.size.findUnique({
