@@ -28,6 +28,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         toast.success("Color Id copied to clipboard")
     }
 
+    console.log(data)
+
 
     const onDelete = async () => {
         try {
@@ -64,8 +66,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                     <DropdownMenuLabel>
                         Actions
                     </DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/colors
-                    /${data.id}`)} >
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)} >
                         <Edit className="h-4 w-4 mr-2" />
                         Update
                     </DropdownMenuItem>
@@ -73,7 +74,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                         <Copy className="h-4 w-4 mr-2" />
                         Copy Id
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={()=> setOpen(true)}>
+                    <DropdownMenuItem onClick={() => setOpen(true)}>
                         <Delete className="h-4 w-4 mr-2" />
                         Delete
                     </DropdownMenuItem>
